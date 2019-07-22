@@ -6,7 +6,7 @@ import sys
 
 
 def install(package):
-    subprocess.call([sys.executable, "-m", "pip", "install", "--upgrade", '-r', package])
+    subprocess.call([sys.executable, "-m", "pip", "install", "--upgrade", package])
 
 
 try:
@@ -25,7 +25,7 @@ CLASSIFIERS = [
     'Topic :: Software Development :: Libraries :: Python Modules'
 ]
 
-description = 'Windows Registry related'
+description = 'List Helpers'
 
 dirname = os.path.dirname(__file__)
 readme_filename = os.path.join(dirname, 'README.rst')
@@ -38,7 +38,7 @@ if os.path.exists(readme_filename):
     except Exception:
         pass
 
-# install('https://github.com/bitranox/lib_cast/archive/master.zip')
+install('https://github.com/bitranox/lib_cast/archive/master.zip')
 
 setup(
     name='lib_list',
