@@ -1,6 +1,13 @@
 """Setuptools entry point."""
 import codecs
 import os
+import subprocess
+import sys
+
+
+def install(package):
+    subprocess.call([sys.executable, "-m", "pip", "install", "--upgrade", '-r', package])
+
 
 try:
     from setuptools import setup
@@ -30,6 +37,8 @@ if os.path.exists(readme_filename):
         long_description = readme_content
     except Exception:
         pass
+
+install('https://github.com/bitranox/lib_cast/archive/master.zip')
 
 setup(
     name='lib_list',
