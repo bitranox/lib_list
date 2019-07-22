@@ -38,7 +38,7 @@ if os.path.exists(readme_filename):
     except Exception:
         pass
 
-install('https://github.com/bitranox/lib_cast/archive/master.zip')
+# install('https://github.com/bitranox/lib_cast/archive/master.zip')
 
 setup(
     name='lib_list',
@@ -53,4 +53,4 @@ setup(
     install_requires=['pytest', 'typing'],
     classifiers=CLASSIFIERS,
     setup_requires=['pytest-runner'],
-    tests_require=['pytest', 'lib_cast'])
+    tests_require=['pytest'])
