@@ -19,7 +19,7 @@ lib_registry
    :target: https://bettercodehub.com/results/bitranox/lib_list
 .. |snyk security| image:: https://snyk.io/test/github/bitranox/lib_list/badge.svg
    :target: https://snyk.io/test/github/bitranox/lib_list
-.. |code climate| image:: https://api.codeclimate.com/v1/badges/affaa3b099c55c69950c/maintainability
+.. |code climate| image:: https://api.codeclimate.com/v1/badges/64c43749ac6b4c52478d/maintainability
    :target: https://codeclimate.com/github/bitranox/lib_list/maintainability
    :alt: Maintainability
 
