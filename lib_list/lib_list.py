@@ -1,7 +1,10 @@
+# STDLIB
 import fnmatch
-import lib_cast
 import sys
 from typing import List
+
+# OWN
+import lib_cast
 
 
 def str_in_list_non_case_sensitive(string: str, list_of_strings: List[str]) -> bool:
