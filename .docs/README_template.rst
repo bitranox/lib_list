@@ -3,9 +3,9 @@ lib_registry
 
 .. include:: ./badges_without_jupyter.rst
 
-some convenience functions to access the windows registry - to be extended.
+some convenience functions for lists
 
-supports python 2.7 - 3.7 and possibly other dialects.
+supports python 3.7 and possibly other dialects.
 
 
 .. include:: ./tested_under.rst
