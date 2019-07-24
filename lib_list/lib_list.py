@@ -110,15 +110,7 @@ def ls_strip_afz(ls_elements: []) -> []:
 
 
 def is_str_in_list_elements(ls_elements: [], s_search_string: str) -> bool:
-    """
-    liefere True wenn einer der Elemente den s_searchstring enthält
-
-    :param ls_elements:         eine Liste mit Elementen
-    :param s_search_string:     der Suchstring
-
-    :return:                    b_ls_contains_searchstring
-
-    """
+    """ delivers true, if one of the strings in the list contains (or is equal) the searchstring """
 
     if not ls_elements:   # leere Liste no match, return False
         return False
