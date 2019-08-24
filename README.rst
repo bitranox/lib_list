@@ -1,5 +1,5 @@
-lib_registry
-============
+lib_list
+========
 
 |Pypi Status| |license| |maintenance|
 
@@ -109,10 +109,9 @@ Requirements
 ------------
 following modules will be automatically installed :
 
-.. code-block:: shell
+.. code-block:: bash
 
-    pytest              # see : https://github.com/pytest-dev/pytest
-    typing              # see : https://pypi.org/project/typing/
+    git+https://github.com/bitranox/lib_cast.git
 
 Acknowledgements
 ----------------

@@ -1,7 +1,7 @@
 # STDLIB
 import fnmatch
 import sys
-from typing import List
+from typing import Any, List
 
 # OWN
 import lib_cast
@@ -22,7 +22,7 @@ def str_in_list_non_case_sensitive(string: str, list_of_strings: List[str]) -> b
         return False
 
 
-def del_double_elements(list_elements: list) -> list:
+def del_double_elements(list_elements: List[Any]) -> List[Any]:
     """
     >>> del_double_elements([])
     []
@@ -37,7 +37,7 @@ def del_double_elements(list_elements: list) -> list:
     return list(set(list_elements))
 
 
-def str_in_list_to_lower(list_of_strings: [str]) -> [str]:
+def str_in_list_to_lower(list_of_strings: List[str]) -> List[str]:
     """
     >>> str_in_list_to_lower(['A','b','C'])
     ['a', 'b', 'c']
@@ -49,7 +49,7 @@ def str_in_list_to_lower(list_of_strings: [str]) -> [str]:
     return [string.lower() for string in list_of_strings]
 
 
-def str_in_list_lower_and_de_double(list_of_strings: [str]) -> [str]:
+def str_in_list_lower_and_de_double(list_of_strings: List[str]) -> List[str]:
     if not list_of_strings:  # leere Liste oder None wieder unverändert retournieren
         return list_of_strings
     list_of_strings_lower = str_in_list_to_lower(list_of_strings=list_of_strings)
@@ -57,7 +57,7 @@ def str_in_list_lower_and_de_double(list_of_strings: [str]) -> [str]:
     return list_of_strings_lower_and_de_double
 
 
-def ls_strip_elements(ls_elements: [str]) -> [str]:
+def ls_strip_elements(ls_elements: List[str]) -> List[str]:
     """
     >>> ls_strip_elements(['  a','bbb','   '])
     ['a', 'bbb', '']
@@ -71,7 +71,7 @@ def ls_strip_elements(ls_elements: [str]) -> [str]:
     return [s_element.strip() for s_element in ls_elements]
 
 
-def ls_del_empty_elements(ls_elements: []):
+def ls_del_empty_elements(ls_elements: List[Any]) -> List[Any]:
     """
     >>> ls_del_empty_elements([])
     []
@@ -89,7 +89,7 @@ def ls_del_empty_elements(ls_elements: []):
     return list(filter(None, ls_elements))
 
 
-def ls_strip_afz(ls_elements: []) -> []:
+def ls_strip_afz(ls_elements: List[str]) -> List[str]:
     # Entfernt die Anführungszeichen für alle Elemente einer Liste mit Strings.
     # ['"  a"',"'bbb'",'ccc'] --> ['  a','bbb','ccc']
 
@@ -109,7 +109,7 @@ def ls_strip_afz(ls_elements: []) -> []:
     return ls_newelements
 
 
-def is_str_in_list_elements(ls_elements: [], s_search_string: str) -> bool:
+def is_str_in_list_elements(ls_elements: List[str], s_search_string: str) -> bool:
     """ delivers true, if one of the strings in the list contains (or is equal) the searchstring """
 
     if not ls_elements:   # leere Liste no match, return False
@@ -122,7 +122,7 @@ def is_str_in_list_elements(ls_elements: [], s_search_string: str) -> bool:
     return False
 
 
-def ls_del_elements_containing(ls_elements: list, s_search_string: str) -> []:
+def ls_del_elements_containing(ls_elements: List[str], s_search_string: str) -> List[str]:
     """
     entferne jene Elemente deren Typ str ist und die s_search_string enthalten.
     gib alle anderen Elemente unverändert retour.
@@ -142,7 +142,7 @@ def ls_del_elements_containing(ls_elements: list, s_search_string: str) -> []:
     return ls_results
 
 
-def get_list_elements_containing(ls_elements: list, s_search_string: str) -> []:
+def get_list_elements_containing(ls_elements: List[str], s_search_string: str) -> List[str]:
     """
     liefere jene Elemente deren Typ str ist und s_search_string enthalten.
 
@@ -164,7 +164,7 @@ def get_list_elements_containing(ls_elements: list, s_search_string: str) -> []:
     return ls_results
 
 
-def ls_elements_replace_strings(ls_elements: list, s_old: str, s_new: str) -> []:
+def ls_elements_replace_strings(ls_elements: List[str], s_old: str, s_new: str) -> List[str]:
     """
     führe ein <str>.replace(s_old, s_new) in allen Elementen der Liste durch, welche vom Typ str sind
 
@@ -187,7 +187,7 @@ def ls_elements_replace_strings(ls_elements: list, s_old: str, s_new: str) -> []
     return ls_results
 
 
-def is_list_element_fnmatching(ls_elements: list, s_fnmatch_searchpattern: str) -> bool:
+def is_list_element_fnmatching(ls_elements: List[str], s_fnmatch_searchpattern: str) -> bool:
     """
     liefere True wenn einer der Elemente den s_searchstring (fnmatch) enthält
 
@@ -210,7 +210,7 @@ def is_list_element_fnmatching(ls_elements: list, s_fnmatch_searchpattern: str) 
     return b_ls_fnmatching_searchstring
 
 
-def get_elements_fnmatching(ls_elements: [], s_fnmatch_searchpattern: str) -> []:
+def get_elements_fnmatching(ls_elements: List[str], s_fnmatch_searchpattern: str) -> List[str]:
     """
     liefere jene Elemente deren Typ str ist und s_fnmatch_searchpattern enthalten.
 
@@ -233,7 +233,7 @@ def get_elements_fnmatching(ls_elements: [], s_fnmatch_searchpattern: str) -> []
     return ls_results
 
 
-def is_list_element_l_fnmatching(ls_elements: [], ls_fnmatch_searchpattern: [str]) -> bool:
+def is_list_element_l_fnmatching(ls_elements: List[str], ls_fnmatch_searchpattern: List[str]) -> bool:
     """
     liefere True wenn eines der ls_elements einen der ls_searchstrings (fnmatch) enthält
 
@@ -258,7 +258,7 @@ def is_list_element_l_fnmatching(ls_elements: [], ls_fnmatch_searchpattern: [str
     return False
 
 
-def strip_and_add_non_empty_args_to_list(*args):
+def strip_and_add_non_empty_args_to_list(*args: Any) -> List[Any]:
     """
     erzeuge eine Liste von Argumenten, leere Argumente werden nicht in die Liste aufgenommen
     Status:        Production
@@ -278,7 +278,7 @@ def strip_and_add_non_empty_args_to_list(*args):
     return ls_args
 
 
-def ls_substract(ls_minuend: [], ls_subtrahend: []) -> []:
+def ls_substract(ls_minuend: List[Any], ls_subtrahend: List[Any]) -> List[Any]:
     """
     subtrahiere Liste ls_subtrahend von Liste ls_minuend
     wenn ein Element in Liste ls_minuend mehrfach vorkommt, so wird nur ein Element abgezogen :
@@ -295,7 +295,7 @@ def ls_substract(ls_minuend: [], ls_subtrahend: []) -> []:
     return ls_minuend
 
 
-def ls_substract_all(ls_minuend: [], ls_subtrahend: []) -> []:
+def ls_substract_all(ls_minuend: List[Any], ls_subtrahend: List[Any]) -> List[Any]:
     """
     subtrahiere Liste ls_subtrahend von Liste ls_minuend
     wenn ein Element in Liste ls_minuend mehrfach vorkommt, so werden alle Elemente abgezogen :
@@ -311,7 +311,7 @@ def ls_substract_all(ls_minuend: [], ls_subtrahend: []) -> []:
     return ls_minuend
 
 
-def split_list_into_junks(source_list: list, junk_size: int = sys.maxsize) -> List[list]:
+def split_list_into_junks(source_list: List[Any], junk_size: int = sys.maxsize) -> List[List[Any]]:
     """
     divides a List into Junks
 

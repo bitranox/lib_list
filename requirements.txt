@@ -1,3 +1,1 @@
-pytest                                                        # see : https://github.com/pytest-dev/pytest
-typing                                                        # see : https://pypi.org/project/typing/
-# https://github.com/bitranox/lib_cast/archive/master.zip       # see : https://github.com/bitranox/lib_cast
+git+https://github.com/bitranox/lib_cast.git
