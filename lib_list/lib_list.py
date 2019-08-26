@@ -71,6 +71,51 @@ def ls_strip_elements(ls_elements: List[str]) -> List[str]:
     return [s_element.strip() for s_element in ls_elements]
 
 
+def ls_strip_list(list_of_strings: List[str], chars: str = '') -> List[str]:
+    """
+    strips list elements of a list, were the value is chars
+    >>> testlist = ['','','a','b','c','','']
+    >>> ls_strip_list(testlist)
+    ['a', 'b', 'c']
+
+    """
+
+    list_of_strings = ls_lstrip_list(list_of_strings, chars)
+    list_of_strings = ls_rstrip_list(list_of_strings, chars)
+    return list_of_strings
+
+
+def ls_lstrip_list(list_of_strings: List[str], chars: str = '') -> List[str]:
+    """
+    strips list elements on the beginning of a list, were the value is chars
+    >>> testlist = ['','','a','b','c','','']
+    >>> ls_lstrip_list(testlist)
+    ['a', 'b', 'c', '', '']
+    >>> testlist = []
+    >>> ls_lstrip_list(testlist)
+    []
+    """
+    while list_of_strings and list_of_strings[0] == chars:
+        list_of_strings = list_of_strings[1:]
+    return list_of_strings
+
+
+def ls_rstrip_list(list_of_strings: List[str], chars: str = '') -> List[str]:
+    """
+    strips list elements on the beginning of a list, were the value is chars
+    >>> testlist = ['','','a','b','c','','']
+    >>> ls_rstrip_list(testlist)
+    ['', '', 'a', 'b', 'c']
+    >>> testlist = []
+    >>> ls_rstrip_list(testlist)
+    []
+
+    """
+    while list_of_strings and list_of_strings[-1] == chars:
+        list_of_strings = list_of_strings[:-1]
+    return list_of_strings
+
+
 def ls_del_empty_elements(ls_elements: List[Any]) -> List[Any]:
     """
     >>> ls_del_empty_elements([])
