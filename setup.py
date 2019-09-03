@@ -9,7 +9,8 @@ except ImportError:
     from distutils.core import setup
 
 package_name = 'lib_list'                                                           # type: str
-required = ['lib_cast @ git+https://github.com/bitranox/lib_cast.git']              # type: List
+# required = ['lib_cast @ git+https://github.com/bitranox/lib_cast.git']            # type: List
+required = ['lib_cast']                                                             # type: List
 required_for_tests = list()                                                         # type: List
 entry_points = dict()                                                               # type: Dict
 

@@ -9,14 +9,14 @@ env:
         - pip_command="pip"
         - python_command="python"
         - WINEDEBUG=fixme-all       # switch off wine fix me messages
-        - CODECOV_TOKEN="95b44c95-2c2f-4c5f-b70e-eb4cbfec15f1"
-        # pypi_password for rst_include
+
+        # pypi_password for lib_list
         # This works for sure - the Travis deploy is somehow buggy.
         # create the secret :
         # cd /<repository>
-        # travis encrypt pypi_password=*****
+        # travis encrypt -r bitranox/lib_list pypi_password=*****
         # copy and paste the encrypted password here
-        # - secure: "....."
+        - secure: "cLJSb+r5NXwaBbkfbrpsrBNfyWLpSSBjdsnaxE/IzGriZqiB9drBRQlwaCogoiPrKtqQt4bwtF9kfaj8yeTrwICZnINhwimSvrbJkHKG0z1TRkAiRstzQ9IGVpUirhkUdF+IzjOXXDcUpJosTFZRJ+W+C9v4FULSgFFWdR2qKTNxyGPzRAFK8QC2Kmv0efOg94FO3yzXDEUxt4OeyMpwSFSuF2IsEzMwIFhK15I1wJPme3rIUacPTkuHhtcIePUcB1l/CAjMjyEh2Xrhq+RFajJMRHw7jizuI6eaFiyq5yYQWjvUfH2uU9jPheoKYM8w0xP2+5uANlbCL/C/hrgr5CO0DbX4tAuclzL4sWznaUe3aL62SOvc/RZgbh4KQw4adz6XoZwJ7h9RAIrNKE07Srjmb4v1ZLnZm3BWveZ/890VNyRYDimG+CpVK35Rb26zOr5cqDbRI9iOO3HEJbuJcdg7J8zwo2mBOJ1xhfEXoaoNN96gLn6MtqwFTfCvhsXXYBVHX0WOoS89DIk9nih3N/G/v8gGb9TA6xzginSiBZsSTwEvvJcpTcqc+w8raU5iRFObBEDAEFfLq1dDd03BoQb65ZSGEsADZgrsvpWwOyFmFTLzjg18z8ympF3IFz5O7MieDfqZrODZ6hB+QbBAtVlZC/Ift4hpQ6wEnDNB5xk="
 
 addons:
     apt:
@@ -57,7 +57,7 @@ matrix:
       before_install:
           - export mypy_static_typecheck="True"
           - export build_docs="True"
-          - export deploy_on_pypi="False"
+          - export deploy_on_pypi="True"
 
     - os: linux
       language: python
