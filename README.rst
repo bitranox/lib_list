@@ -124,7 +124,7 @@ following modules will be automatically installed :
     pytest-runner
 
     ## Project Requirements
-    lib_cast
+    lib_cast @ git+https://github.com/bitranox/lib_cast.git
 
 Acknowledgements
 ----------------
@@ -146,6 +146,10 @@ This software is licensed under the `MIT license <http://en.wikipedia.org/wiki/M
 
 Changelog
 =========
+
+0.0.2
+-----
+development
 
 0.0.1
 -----
