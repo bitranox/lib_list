@@ -1,7 +1,7 @@
 # STDLIB
 import fnmatch
 import sys
-from typing import Any, List
+from typing import Any, List, Union
 
 # OWN
 import lib_cast
@@ -57,7 +57,7 @@ def str_in_list_lower_and_de_double(list_of_strings: List[str]) -> List[str]:
     return list_of_strings_lower_and_de_double
 
 
-def ls_strip_elements(ls_elements: List[str]) -> List[str]:
+def ls_strip_elements(ls_elements: List[str], chars: Union[None, str] = None) -> List[str]:
     """
     >>> ls_strip_elements(['  a','bbb','   '])
     ['a', 'bbb', '']
@@ -68,7 +68,21 @@ def ls_strip_elements(ls_elements: List[str]) -> List[str]:
 
     if (not ls_elements) or (ls_elements is None):  # leere Liste oder None wieder unverändert retournieren
         return list()
-    return [s_element.strip() for s_element in ls_elements]
+    return [s_element.strip(chars) for s_element in ls_elements]
+
+
+def ls_rstrip_elements(ls_elements: List[str], chars: Union[None, str] = None) -> List[str]:
+    """
+    >>> ls_rstrip_elements(['  a','bbb','c   '])
+    ['  a', 'bbb', 'c']
+    >>> ls_rstrip_elements([])
+    []
+
+    """
+
+    if (not ls_elements) or (ls_elements is None):  # leere Liste oder None wieder unverändert retournieren
+        return list()
+    return [s_element.rstrip(chars) for s_element in ls_elements]
 
 
 def ls_strip_list(list_of_strings: List[str], chars: str = '') -> List[str]:
