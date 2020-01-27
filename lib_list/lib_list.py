@@ -159,11 +159,20 @@ def ls_strip_afz(ls_elements: List[str]) -> List[str]:
     for s_element in ls_elements:
         # Anführungszeichen aus dem Value entfernen
         s_element = s_element.strip()
-        if (s_element[0] == '"') and (s_element[-1] == '"'):
+        if (s_element.startswith('"') and s_element.endswith('"')) or (s_element.startswith("'") and s_element.endswith("'")):
             s_element = s_element[1:-1]
-        else:
-            if (s_element[0] == "'") and (s_element[-1] == "'"):
-                s_element = s_element[1:-1]
+        ls_newelements.append(s_element)
+    return ls_newelements
+
+
+def ls_double_quote_if_contains_blank(ls_elements: List[str]) -> List[str]:
+    if (not ls_elements) or (ls_elements is None):  # leere Liste oder None wieder unverändert retournieren
+        return []
+
+    ls_newelements = []
+    for s_element in ls_elements:
+        if ' ' in s_element:
+            s_element = '"' + s_element + '"'
         ls_newelements.append(s_element)
     return ls_newelements
 
