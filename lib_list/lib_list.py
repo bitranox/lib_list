@@ -4,7 +4,7 @@ import sys
 from typing import Any, List, Union
 
 # OWN
-import lib_cast
+import lib_cast  # type: ignore
 
 
 def str_in_list_non_case_sensitive(string: str, list_of_strings: List[str]) -> bool:
