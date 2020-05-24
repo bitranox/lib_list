@@ -3,9 +3,6 @@ import fnmatch
 import sys
 from typing import Any, List, Union
 
-# OWN
-import lib_cast  # type: ignore
-
 
 def str_in_list_non_case_sensitive(string: str, list_of_strings: List[str]) -> bool:
     """
@@ -15,7 +12,7 @@ def str_in_list_non_case_sensitive(string: str, list_of_strings: List[str]) -> b
     True
     """
     string = string.lower()
-    list_of_strings = lib_cast.cast_list_of_strings_to_lower(list_of_strings)
+    list_of_strings = [my_string.lower() for my_string in list_of_strings]
     if string in list_of_strings:
         return True
     else:
