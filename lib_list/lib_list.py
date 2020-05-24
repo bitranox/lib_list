@@ -348,12 +348,12 @@ def strip_and_add_non_empty_args_to_list(*args: Any) -> List[Any]:
 
 def ls_substract(ls_minuend: List[Any], ls_subtrahend: List[Any]) -> List[Any]:
     """
-    subtrahiere Liste ls_subtrahend von Liste ls_minuend
-    wenn ein Element in Liste ls_minuend mehrfach vorkommt, so wird nur ein Element abgezogen :
+    subtrahiere Liste l_subtrahend von Liste l_minuend
+    wenn ein Element in Liste l_minuend mehrfach vorkommt, so wird nur ein Element abgezogen :
 
-    >>> ls_minuend = ['a','a','b']
-    >>> ls_subtrahend = ['a','c']
-    >>> ls_substract(ls_minuend, ls_subtrahend)
+    >>> l_minuend = ['a','a','b']
+    >>> l_subtrahend = ['a','c']
+    >>> ls_substract(l_minuend, l_subtrahend)
     ['a', 'b']
 
     """
@@ -363,20 +363,37 @@ def ls_substract(ls_minuend: List[Any], ls_subtrahend: List[Any]) -> List[Any]:
     return ls_minuend
 
 
-def ls_substract_all(ls_minuend: List[Any], ls_subtrahend: List[Any]) -> List[Any]:
+def l_substract_all_keep_sorting(l_minuend: List[Any], l_subtrahend: List[Any]) -> List[Any]:
     """
-    subtrahiere Liste ls_subtrahend von Liste ls_minuend
-    wenn ein Element in Liste ls_minuend mehrfach vorkommt, so werden alle Elemente abgezogen :
-    >>> ls_minuend = ['a','a','b']
-    >>> ls_subtrahend = ['a','c']
-    >>> ls_substract_all(ls_minuend, ls_subtrahend)
+    subtrahiere Liste l_subtrahend von Liste l_minuend
+    wenn ein Element in Liste l_minuend mehrfach vorkommt, so werden alle Elemente abgezogen :
+    die Sortierung wird beibehalten !
+    >>> l_minuend = ['a','a','b']
+    >>> l_subtrahend = ['a','c']
+    >>> l_substract_all_keep_sorting(l_minuend, l_subtrahend)
     ['b']
 
     """
-    for s_element in ls_subtrahend:
-        while s_element in ls_minuend:
-            ls_minuend.remove(s_element)
-    return ls_minuend
+    l_subtrahend = list(set(l_subtrahend))
+    for s_element in l_subtrahend:
+        while s_element in l_minuend:
+            l_minuend.remove(s_element)
+    return l_minuend
+
+
+def l_substract_unsorted_fast(ls_minuend: List[Any], ls_subtrahend: List[Any]) -> List[Any]:
+    """
+    subtrahiere Liste ls_subtrahend von Liste ls_minuend
+    wenn ein Element in Liste ls_minuend mehrfach vorkommt, so werden alle Elemente abgezogen
+    die Sortierung wird NICHT beibehalten !
+    >>> ls_minuend = ['a','a','b']
+    >>> ls_subtrahend = ['a','c']
+    >>> l_substract_unsorted_fast(ls_minuend, ls_subtrahend)
+    ['b']
+
+    """
+    l_result = list(set(ls_minuend) - set(ls_subtrahend))
+    return l_result
 
 
 def split_list_into_junks(source_list: List[Any], junk_size: int = sys.maxsize) -> List[List[Any]]:
