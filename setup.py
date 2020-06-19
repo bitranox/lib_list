@@ -94,5 +94,6 @@ setup(name=package_name,
       # dependencies must not be put here for pip install
       setup_requires=['typing',
                       'pathlib',
-                      'pytest-runner']
+                      'pytest-runner'],
+      zip_safe=False
       )
