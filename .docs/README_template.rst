@@ -1,38 +1,38 @@
 lib_list
 ========
 
-.. include:: ./badges_without_jupyter.rst
+.. include:: ./badges.rst
 
-some convenience functions for lists
+.. include:: ./description.rst
 
-supports python 3.7 and possibly other dialects.
+----
 
+automated tests, Travis Matrix, Documentation, Badges, etc. are managed with `PizzaCutter <https://github
+.com/bitranox/PizzaCutter>`_ (cookiecutter on steroids)
+
+Python version required: 3.6.0 or newer
 
 .. include:: ./tested_under.rst
 
 ----
 
-- `Installation and Upgrade`_
-- `Basic Usage`_
-- `Requirements`_
-- `Acknowledgements`_
-- `Contribute`_
-- `Report Issues <https://github.com/{repository_slug}/blob/master/ISSUE_TEMPLATE.md>`_
-- `Pull Request <https://github.com/{repository_slug}/blob/master/PULL_REQUEST_TEMPLATE.md>`_
-- `Code of Conduct <https://github.com/{repository_slug}/blob/master/CODE_OF_CONDUCT.md>`_
-- `License`_
-- `Changelog`_
+.. include:: ./index.rst
 
 ----
+
+.. include:: ./try_in_jupyter.rst
 
 Installation and Upgrade
 ------------------------
 .. include:: ./installation.rst
 
-
-Basic Usage
+Usage
 -----------
-.. include:: ./basic_usage.rst
+.. include:: ./usage.rst
+
+Usage from Commandline
+------------------------
+.. include:: ./commandline_help.rst
 
 Requirements
 ------------

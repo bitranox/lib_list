@@ -1,29 +1,27 @@
-"""Setuptools entry point."""
+"""
+Setuptools entry point.
+see : https://docs.python.org/3.8/distutils/setupscript.html
+"""
+
 import codecs
 import os
 import pathlib
-from typing import Dict, List
+from typing import Any, List, Dict
 
-try:
-    from setuptools import setup                                                    # type: ignore
-except ImportError:
-    from distutils.core import setup
-
-package_name = 'lib_list'                                                           # type: str
-required = []                                                                       # type: List[str]
-required_for_tests = list()                                                         # type: List[str]
-entry_points = dict()                                                               # type: Dict[str, str]
-
-
-def get_version(dist_directory: str) -> str:
-    with open(str(pathlib.Path(__file__).parent / '{dist_directory}/version.txt'.format(dist_directory=dist_directory)), mode='r') as version_file:
-        version = version_file.readline()
-    return version
+from setuptools import setup                # type: ignore
+from setuptools import find_packages
 
 
 def is_travis_deploy() -> bool:
     if 'travis_deploy' in os.environ:
         if os.environ['travis_deploy'] == 'True':
+            return True
+    return False
+
+
+def is_tagged_commit() -> bool:
+    if 'TRAVIS_TAG' in os.environ:
+        if os.environ['TRAVIS_TAG'] != '':
             return True
     return False
 
@@ -41,22 +39,9 @@ def strip_links_from_required(l_required: List[str]) -> List[str]:
     return l_req_stripped
 
 
-if is_travis_deploy():
-    required = strip_links_from_required(required)
-
-
-CLASSIFIERS = [
-    'Development Status :: 5 - Production/Stable',
-    'Intended Audience :: Developers',
-    'License :: OSI Approved :: MIT License',
-    'Natural Language :: English',
-    'Operating System :: OS Independent',
-    'Programming Language :: Python',
-    'Topic :: Software Development :: Libraries :: Python Modules'
-]
-
+long_description = 'some convenience functions for lists'   # will be overwritten with long_description if exists !
 path_readme = pathlib.Path(__file__).parent / 'README.rst'
-long_description = package_name
+
 if path_readme.exists():
     # noinspection PyBroadException
     try:
@@ -66,34 +51,59 @@ if path_readme.exists():
         pass
 
 
-setup(name=package_name,
-      version=get_version(package_name),
-      url='https://github.com/bitranox/{package_name}'.format(package_name=package_name),
-      packages=[package_name],
-      package_data={package_name: ['version.txt', 'py.typed']},
-      description=package_name,
-      long_description=long_description,
-      long_description_content_type='text/x-rst',
-      author='Robert Nowotny',
-      author_email='bitranox@gmail.com',
-      classifiers=CLASSIFIERS,
-      entry_points=entry_points,
-      # minimally needs to run tests - no project requirements here
-      tests_require=['typing',
-                     'pathlib',
-                     'mypy ; platform_python_implementation != "PyPy" and python_version >= "3.5"',
-                     'pytest',
-                     'pytest-pep8 ; python_version < "3.5"',
-                     'pytest-pycodestyle ; python_version >= "3.5"',
-                     'pytest-mypy ; platform_python_implementation != "PyPy" and python_version >= "3.5"'
-                     ] + required_for_tests,
+def get_requirements_from_file(requirements_filename: str) -> List[str]:
+    """
+    >>> assert len(get_requirements_from_file('requirements.txt')) > 0
+    """
+    l_requirements = list()
+    with open(str(pathlib.Path(__file__).parent / requirements_filename), mode='r') as requirements_file:
+        for line in requirements_file:
+            line_data = get_line_data(line)
+            if line_data:
+                l_requirements.append(line_data)
+    return l_requirements
 
-      # specify what a project minimally needs to run correctly
-      install_requires=['typing', 'pathlib'] + required + required_for_tests,
-      # minimally needs to run the setup script, dependencies needs also to put here for setup.py install test
-      # dependencies must not be put here for pip install
-      setup_requires=['typing',
-                      'pathlib',
-                      'pytest-runner'],
-      zip_safe=False
-      )
+
+def get_line_data(line: str) -> str:
+    line = line.strip()
+    if '#' in line:
+        line = line.split('#', 1)[0].strip()
+    return line
+
+
+tests_require = get_requirements_from_file('requirements_test.txt')
+install_requires = get_requirements_from_file('requirements.txt')
+setup_requires = list(set(tests_require + install_requires))
+
+# for deploy on pypi we must not rely on imports from github
+if is_travis_deploy() and is_tagged_commit():
+    setup_requires = strip_links_from_required(setup_requires)
+    tests_require = strip_links_from_required(tests_require)
+    install_requires = strip_links_from_required(install_requires)
+
+setup_kwargs: Dict[str, Any] = dict()
+setup_kwargs['name'] = 'lib_list'
+setup_kwargs['version'] = '0.1.0'
+setup_kwargs['url'] = 'https://github.com/bitranox/lib_list'
+setup_kwargs['packages'] = find_packages()
+setup_kwargs['package_data'] = {'lib_list': ['py.typed', '*.pyi', '__init__.pyi']}
+setup_kwargs['description'] = 'some convenience functions for lists'
+setup_kwargs['long_description'] = long_description
+setup_kwargs['long_description_content_type'] = 'text/x-rst'
+setup_kwargs['author'] = 'Robert Nowotny'
+setup_kwargs['author_email'] = 'bitranox@gmail.com'
+setup_kwargs['classifiers'] = ['Development Status :: 5 - Production/Stable', 'Intended Audience :: Developers', 'License :: OSI Approved :: MIT License', 'Natural Language :: English', 'Operating System :: OS Independent', 'Programming Language :: Python', 'Topic :: Software Development :: Libraries :: Python Modules']
+setup_kwargs['entry_points'] = {'console_scripts': ['lib_list = lib_list.lib_list_cli:cli_main']}
+# minimally needs to run tests - no project requirements here
+setup_kwargs['tests_require'] = tests_require
+# specify what a project minimally needs to run correctly
+setup_kwargs['install_requires'] = install_requires
+# minimally needs to run the setup script, dependencies needs also to put here for "setup.py install test"
+# dependencies must not be put here for pip install
+setup_kwargs['setup_requires'] = setup_requires
+setup_kwargs['python_requires'] = ">=3.6.0"
+setup_kwargs['zip_safe'] = False
+
+
+if __name__ == '__main__':
+    setup(**setup_kwargs)

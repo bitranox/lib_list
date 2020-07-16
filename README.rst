@@ -1,38 +1,64 @@
 lib_list
 ========
 
-|Pypi Status| |license| |maintenance|
+|travis_build| |license| |jupyter| |pypi|
 
-|Build Status| |Codecov Status| |Better Code| |code climate| |snyk security|
+|codecov| |better_code| |cc_maintain| |cc_issues| |cc_coverage| |snyk|
+
+
+.. |travis_build| image:: https://img.shields.io/travis/bitranox/lib_list/master.svg
+   :target: https://travis-ci.org/bitranox/lib_list
 
 .. |license| image:: https://img.shields.io/github/license/webcomics/pywine.svg
    :target: http://en.wikipedia.org/wiki/MIT_License
-.. |maintenance| image:: https://img.shields.io/maintenance/yes/{last_update_yyyy}.svg
-.. |Build Status| image:: https://travis-ci.org/bitranox/lib_list.svg?branch=master
-   :target: https://travis-ci.org/bitranox/lib_list
+
+.. |jupyter| image:: https://mybinder.org/badge_logo.svg
+ :target: https://mybinder.org/v2/gh/bitranox/lib_list/master?filepath=lib_list.ipynb
+
 .. for the pypi status link note the dashes, not the underscore !
-.. |Pypi Status| image:: https://badge.fury.io/py/lib-list.svg
+.. |pypi| image:: https://img.shields.io/pypi/status/lib-list?label=PyPI%20Package
    :target: https://badge.fury.io/py/lib_list
-.. |Codecov Status| image:: https://codecov.io/gh/bitranox/lib_list/branch/master/graph/badge.svg
+
+.. |codecov| image:: https://img.shields.io/codecov/c/github/bitranox/lib_list
    :target: https://codecov.io/gh/bitranox/lib_list
-.. |Better Code| image:: https://bettercodehub.com/edge/badge/bitranox/lib_list?branch=master
+
+.. |better_code| image:: https://bettercodehub.com/edge/badge/bitranox/lib_list?branch=master
    :target: https://bettercodehub.com/results/bitranox/lib_list
-.. |snyk security| image:: https://snyk.io/test/github/bitranox/lib_list/badge.svg
-   :target: https://snyk.io/test/github/bitranox/lib_list
-.. |code climate| image:: https://api.codeclimate.com/v1/badges/64c43749ac6b4c52478d/maintainability
+
+.. |cc_maintain| image:: https://img.shields.io/codeclimate/maintainability-percentage/bitranox/lib_list?label=CC%20maintainability
    :target: https://codeclimate.com/github/bitranox/lib_list/maintainability
    :alt: Maintainability
 
+.. |cc_issues| image:: https://img.shields.io/codeclimate/issues/bitranox/lib_list?label=CC%20issues
+   :target: https://codeclimate.com/github/bitranox/lib_list/maintainability
+   :alt: Maintainability
+
+.. |cc_coverage| image:: https://img.shields.io/codeclimate/coverage/bitranox/lib_list?label=CC%20coverage
+   :target: https://codeclimate.com/github/bitranox/lib_list/test_coverage
+   :alt: Code Coverage
+
+.. |snyk| image:: https://img.shields.io/snyk/vulnerabilities/github/bitranox/lib_list
+   :target: https://snyk.io/test/github/bitranox/lib_list
+
 some convenience functions for lists
-
-supports python 3.7 and possibly other dialects.
-
-`100% code coverage <https://codecov.io/gh/bitranox/lib_list>`_, mypy static type checking, tested under `Linux, OsX, Windows and Wine <https://travis-ci.org/bitranox/lib_list>`_, automatic daily builds  and monitoring
 
 ----
 
+automated tests, Travis Matrix, Documentation, Badges, etc. are managed with `PizzaCutter <https://github
+.com/bitranox/PizzaCutter>`_ (cookiecutter on steroids)
+
+Python version required: 3.6.0 or newer
+
+tested on linux "bionic" with python 3.6, 3.7, 3.8, 3.8-dev, pypy3
+
+`100% code coverage <https://codecov.io/gh/bitranox/lib_list>`_, codestyle checking ,mypy static type checking ,tested under `Linux, macOS, Windows <https://travis-ci.org/bitranox/lib_list>`_, automatic daily builds and monitoring
+
+----
+
+- `Try it Online`_
 - `Installation and Upgrade`_
-- `Basic Usage`_
+- `Usage`_
+- `Usage from Commandline`_
 - `Requirements`_
 - `Acknowledgements`_
 - `Contribute`_
@@ -44,66 +70,125 @@ supports python 3.7 and possibly other dialects.
 
 ----
 
+Try it Online
+-------------
+
+You might try it right away in Jupyter Notebook by using the "launch binder" badge, or click `here <https://mybinder.org/v2/gh/{{rst_include.
+repository_slug}}/master?filepath=lib_list.ipynb>`_
+
 Installation and Upgrade
 ------------------------
 
-From source code:
+- Before You start, its highly recommended to update pip and setup tools:
+
+
+.. code-block:: bash
+
+    python -m pip --upgrade pip
+    python -m pip --upgrade setuptools
+    python -m pip --upgrade wheel
+
+- to install the latest release from PyPi via pip (recommended):
+
+.. code-block:: bash
+
+    # install latest release from PyPi
+    python -m pip install --upgrade lib_list
+
+    # test latest release from PyPi without installing (can be skipped)
+    python -m pip install lib_list --install-option test
+
+- to install the latest development version from github via pip:
+
 
 .. code-block:: bash
 
     # normal install
-    python setup.py install
-    # test without installing
-    python setup.py test
+    python -m pip install --upgrade git+https://github.com/bitranox/lib_list.git
 
-via pip latest Release:
+    # to test without installing (can be skipped)
+    python -m pip install git+https://github.com/bitranox/lib_list.git --install-option test
 
-.. code-block:: bash
+    # to install and upgrade all dependencies regardless of version number
+    python -m pip install --upgrade git+https://github.com/bitranox/lib_list.git --upgrade-strategy eager
 
-    # latest Release from pypi
-    pip install lib_list
 
-    # test without installing
-    pip install lib_list --install-option test
-
-via pip latest Development Version:
-
-.. code-block:: bash
-
-    # upgrade all dependencies regardless of version number (PREFERRED)
-    pip install --upgrade git+https://github.com/bitranox/lib_list.git --upgrade-strategy eager
-    # normal install
-    pip install --upgrade git+https://github.com/bitranox/lib_list.git
-    # test without installing
-    pip install git+https://github.com/bitranox/lib_list.git --install-option test
-
-via requirements.txt:
+- include it into Your requirements.txt:
 
 .. code-block:: bash
 
     # Insert following line in Your requirements.txt:
-    # for the latest Release:
+    # for the latest Release on pypi:
     lib_list
-    # for the latest Development Version :
-    git+https://github.com/bitranox/lib_list.git
+
+    # for the latest development version :
+    lib_list @ git+https://github.com/bitranox/lib_list.git
 
     # to install and upgrade all modules mentioned in requirements.txt:
-    pip install --upgrade -r /<path>/requirements.txt
+    python -m pip install --upgrade -r /<path>/requirements.txt
 
-via python:
 
-.. code-block:: python
 
-    # for the latest Release
-    python -m pip install upgrade lib_list
+- to install the latest development version from source code:
 
-    # for the latest Development Version
-    python -m pip install upgrade git+https://github.com/bitranox/lib_list.git
+.. code-block:: bash
 
-Basic Usage
+    # cd ~
+    $ git clone https://github.com/bitranox/lib_list.git
+    $ cd lib_list
+
+    # to test without installing (can be skipped)
+    python setup.py test
+
+    # normal install
+    python setup.py install
+
+- via makefile:
+  makefiles are a very convenient way to install. Here we can do much more,
+  like installing virtual environments, clean caches and so on.
+
+.. code-block:: shell
+
+    # from Your shell's homedirectory:
+    $ git clone https://github.com/bitranox/lib_list.git
+    $ cd lib_list
+
+    # to run the tests:
+    $ make test
+
+    # to install the package
+    $ make install
+
+    # to clean the package
+    $ make clean
+
+    # uninstall the package
+    $ make uninstall
+
+Usage
 -----------
 
-TBA
+.. code-block::
+
+    import the module and check the code - its easy and documented there, including doctest examples.
+    in case of any questions the usage section might be expanded at a later time
+
+Usage from Commandline
+------------------------
+
+.. code-block:: bash
+
+   Usage: lib_list [OPTIONS] COMMAND [ARGS]...
+
+     some convenience functions for lists
+
+   Options:
+     --version                     Show the version and exit.
+     --traceback / --no-traceback  return traceback information on cli
+     -h, --help                    Show this message and exit.
+
+   Commands:
+     info  get program informations
 
 Requirements
 ------------
@@ -111,20 +196,8 @@ following modules will be automatically installed :
 
 .. code-block:: bash
 
-    ## Test Requirements
-    ## following Requirements will be installed temporarily for
-    ## "setup.py install test" or "pip install <package> --install-option test"
-    typing ; python_version < "3.5"
-    pathlib; python_version < "3.4"
-    mypy ; platform_python_implementation != "PyPy" and python_version >= "3.5"
-    pytest
-    pytest-pep8 ; python_version < "3.5"
-    pytest-pycodestyle ; python_version >= "3.5"
-    pytest-mypy ; platform_python_implementation != "PyPy" and python_version >= "3.5"
-    pytest-runner
-
     ## Project Requirements
-    lib_cast @ git+https://github.com/bitranox/lib_cast.git
+    click
 
 Acknowledgements
 ----------------
