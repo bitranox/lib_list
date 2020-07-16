@@ -1,8 +1,7 @@
 import platform
-import sys
 from typing import List
 
-collect_ignore = ['build_docs.py', '__main__.py']
+collect_ignore = ['setup.py']
 
 
 def pytest_cmdline_preparse(args: List[str]) -> None:
@@ -17,14 +16,13 @@ def pytest_cmdline_preparse(args: List[str]) -> None:
         args[:] = ["-n", str(num)] + args
     """
 
-    # add mypy option if not pypy - so mypy will be called with setup.py install test
-    # add mypy only on 3.x versions
-    # mypy does not find some functions on python 3.6
-    if platform.python_implementation() != "PyPy" and sys.version_info >= (3, 5) and sys.version_info != (3, 6):  # type: ignore
-        args[:] = ["--mypy"] + args
+    additional_mypy_args: List[str] = list()
+    additional_pycodestyle_args: List[str] = list()
 
-    # for python 3.x use --pycodestyle, for python 2.7 use --pep8
-    if sys.version_info <= (3, 5):
-        args[:] = ["--pep8"] + args
-    else:
-        args[:] = ["--pycodestyle"] + args
+    # add mypy option if not pypy
+    # if platform.python_implementation() != "PyPy" and sys.version_info >= (3, 5) and sys.version_info != (3, 6):  # type: ignore
+    if platform.python_implementation() != "PyPy":
+        additional_mypy_args = ['--mypy']
+
+    additional_pycodestyle_args = ['--pycodestyle']
+    args[:] = list(set(args + additional_mypy_args + additional_pycodestyle_args))
