@@ -1,9 +1,12 @@
 Changelog
 =========
 
-0.0.2
+0.1.0
 -----
-development
+2020-07-16: feature release
+    - fix cli test
+    - enable traceback option on cli errors
+    - manage project with PizzaCutter
 
 0.0.1
 -----
