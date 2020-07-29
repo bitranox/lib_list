@@ -1,6 +1,6 @@
 name = 'lib_list'
 title = 'some convenience functions for lists'
-version = '0.1.1'
+version = '0.1.2a0'
 url = 'https://github.com/bitranox/lib_list'
 author = 'Robert Nowotny'
 author_email = 'bitranox@gmail.com'
@@ -14,7 +14,7 @@ Info for lib_list:
 
     some convenience functions for lists
 
-    Version : 0.1.1
+    Version : 0.1.2a0
     Url     : https://github.com/bitranox/lib_list
     Author  : Robert Nowotny
     Email   : bitranox@gmail.com""")
