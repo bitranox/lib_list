@@ -2,21 +2,24 @@
 import sys
 from typing import Optional
 
+# OWN
+import cli_exit_tools
+
 # EXT
 import click
 
-# CONSTANTS
-CLICK_CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
-
+# PROJ
 try:
     from . import __init__conf__
-    from . import cli_exit_tools
     from . import lib_list
 except (ImportError, ModuleNotFoundError):  # pragma: no cover
     # imports for doctest
     import __init__conf__                   # type: ignore  # pragma: no cover
-    import cli_exit_tools                   # type: ignore  # pragma: no cover
     import lib_list      # type: ignore  # pragma: no cover
+
+
+# CONSTANTS
+CLICK_CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
 def info() -> None:
