@@ -1,3 +1,7 @@
+Version 0.1.1 as of 2020-07-29, see changelog_
+
+=======================================================
+
 lib_list
 ========
 
@@ -56,9 +60,9 @@ tested on linux "bionic" with python 3.6, 3.7, 3.8, 3.8-dev, pypy3
 ----
 
 - `Try it Online`_
-- `Installation and Upgrade`_
 - `Usage`_
 - `Usage from Commandline`_
+- `Installation and Upgrade`_
 - `Requirements`_
 - `Acknowledgements`_
 - `Contribute`_
@@ -75,6 +79,31 @@ Try it Online
 
 You might try it right away in Jupyter Notebook by using the "launch binder" badge, or click `here <https://mybinder.org/v2/gh/{{rst_include.
 repository_slug}}/master?filepath=lib_list.ipynb>`_
+
+Usage
+-----------
+
+.. code-block::
+
+    import the module and check the code - its easy and documented there, including doctest examples.
+    in case of any questions the usage section might be expanded at a later time
+
+Usage from Commandline
+------------------------
+
+.. code-block:: bash
+
+   Usage: lib_list [OPTIONS] COMMAND [ARGS]...
+
+     some convenience functions for lists
+
+   Options:
+     --version                     Show the version and exit.
+     --traceback / --no-traceback  return traceback information on cli
+     -h, --help                    Show this message and exit.
+
+   Commands:
+     info  get program informations
 
 Installation and Upgrade
 ------------------------
@@ -165,31 +194,6 @@ Installation and Upgrade
     # uninstall the package
     $ make uninstall
 
-Usage
------------
-
-.. code-block::
-
-    import the module and check the code - its easy and documented there, including doctest examples.
-    in case of any questions the usage section might be expanded at a later time
-
-Usage from Commandline
-------------------------
-
-.. code-block:: bash
-
-   Usage: lib_list [OPTIONS] COMMAND [ARGS]...
-
-     some convenience functions for lists
-
-   Options:
-     --version                     Show the version and exit.
-     --traceback / --no-traceback  return traceback information on cli
-     -h, --help                    Show this message and exit.
-
-   Commands:
-     info  get program informations
-
 Requirements
 ------------
 following modules will be automatically installed :
@@ -198,6 +202,7 @@ following modules will be automatically installed :
 
     ## Project Requirements
     click
+    cli_exit_tools @ git+https://github.com/bitranox/cli_exit_tools.git
 
 Acknowledgements
 ----------------
@@ -219,6 +224,12 @@ This software is licensed under the `MIT license <http://en.wikipedia.org/wiki/M
 
 Changelog
 =========
+
+0.1.1
+-----
+2020-07-29: feature release
+    - use the new pizzacutter template
+    - use cli_exit_tools
 
 0.1.0
 -----
