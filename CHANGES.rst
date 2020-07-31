@@ -6,24 +6,23 @@ Changelog
 - new PATCH version for backwards compatible bug fixes
 
 
-0.1.2a0
--------
-2020-07-29: development
-
+v1.1.2
+--------
+2020-07-31: fix travis build
 
 0.1.1
------
+--------
 2020-07-29: feature release
     - use the new pizzacutter template
     - use cli_exit_tools
 
 0.1.0
------
+--------
 2020-07-16: feature release
     - fix cli test
     - enable traceback option on cli errors
     - manage project with PizzaCutter
 
 0.0.1
------
+--------
 2019-09-03: Initial public release
