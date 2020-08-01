@@ -6,6 +6,10 @@ Changelog
 - new PATCH version for backwards compatible bug fixes
 
 
+v1.1.3
+---------
+2020-08-01: fix pypi deploy
+
 v1.1.2
 --------
 2020-07-31: fix travis build
