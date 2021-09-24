@@ -113,7 +113,7 @@ def ls_lstrip_list(list_of_strings: List[str], chars: str = '') -> List[str]:
 
 def ls_rstrip_list(list_of_strings: List[str], chars: str = '') -> List[str]:
     """
-    strips list elements on the beginning of a list, were the value is chars
+    strips list elements on the end of a list, were the value is chars
     >>> testlist = ['','','a','b','c','','']
     >>> ls_rstrip_list(testlist)
     ['', '', 'a', 'b', 'c']
