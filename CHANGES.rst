@@ -5,6 +5,10 @@ Changelog
 - new MINOR version for added functionality in a backwards compatible manner
 - new PATCH version for backwards compatible bug fixes
 
+v1.1.6
+--------
+2022-03-25: implement github actions
+
 v1.1.5
 --------
 2020-10-09: service release
