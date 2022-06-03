@@ -38,8 +38,6 @@ def get_elements_fnmatching(l_elements: List[Any], s_fnmatch_searchpattern: str)
         if isinstance(s_element, str):
             if fnmatch.fnmatch(s_element, s_fnmatch_searchpattern):
                 ls_results.append(s_element)
-            else:
-                continue
     return ls_results
 
 
