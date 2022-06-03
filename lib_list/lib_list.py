@@ -1,11 +1,11 @@
 # STDLIB
 import fnmatch
 import sys
-from typing import Any, List, Union
+from typing import Any, List, Optional, Tuple, Union
 
 
 def del_double_elements(l_elements: List[Any]) -> List[Any]:
-    """get deduplicated list
+    """get deduplicated list, does NOT keep Order !
     >>> del_double_elements([])
     []
     >>> sorted(del_double_elements(['c','b','a']))
@@ -94,6 +94,9 @@ def is_list_element_l_fnmatching(l_elements: List[Any], ls_fnmatch_searchpattern
     """True if at least one element is matching one of the the searchpatterns
 
     >>> is_list_element_l_fnmatching([], [])
+    False
+
+    >>> is_list_element_l_fnmatching(['abcd', 'def', 1, None], [])
     False
 
     >>> is_list_element_l_fnmatching(['abcd', 'def', 1, None], ['*bc*', '*fg*'])
@@ -194,10 +197,15 @@ def ls_del_elements_containing(ls_elements: List[str], s_search_string: str) -> 
     entferne jene Elemente deren Typ str ist und die s_search_string enthalten.
     gib alle anderen Elemente unverändert retour.
 
-    :param ls_elements:                 eine Liste mit Elementen
-    :param s_search_string:             der Suchstring
+    >>> ls_del_elements_containing(['a', 'abba', 'c'], 'b')
+    ['a', 'c']
+    >>> ls_del_elements_containing(['a', 'abba', 'c'], 'z')
+    ['a', 'abba', 'c']
+    >>> ls_del_elements_containing(['a', 'abba', 'c'], '')
+    ['a', 'abba', 'c']
+    >>> ls_del_elements_containing([], 'b')
+    []
 
-    :return:                            eine Liste mit den Resultaten
     """
     if (not ls_elements) or (not s_search_string):
         return ls_elements
@@ -253,11 +261,10 @@ def ls_elements_replace_strings(ls_elements: List[str], s_old: str, s_new: str) 
     """
     führe ein <str>.replace(s_old, s_new) in allen Elementen der Liste durch, welche vom Typ str sind
 
-    :param ls_elements:                 eine Liste mit Elementen
-    :param s_old:                       die zu Ersetzenden Zeichen
-    :param s_new:                       die neuen Zeichen
-
-    :return:                            eine Liste mit den Resultaten
+    >>> ls_elements_replace_strings(['a', 'b', 'c', 1], 'a', 'z')
+    ['z', 'b', 'c', 1]
+    >>> ls_elements_replace_strings([], 'a', 'z')
+    []
 
     """
 
@@ -317,8 +324,19 @@ def ls_rstrip_list(list_of_strings: List[str], chars: str = "") -> List[str]:
     return list_of_strings
 
 
-def ls_strip_afz(ls_elements: List[str]) -> List[str]:
-    # Entfernt die Anführungszeichen für alle Elemente einer Liste mit Strings.
+def ls_strip_afz(ls_elements: Optional[List[str]]) -> List[str]:
+    """
+    Entfernt die Anführungszeichen für alle Elemente einer Liste mit Strings.
+
+    >>> ls_strip_afz(['"  a"',"'bbb'",'ccc', "   'ddd'"])
+    ['  a', 'bbb', 'ccc', 'ddd']
+    >>> ls_strip_afz([])
+    []
+    >>> ls_strip_afz(None)
+    []
+
+    """
+
     # ['"  a"',"'bbb'",'ccc'] --> ['  a','bbb','ccc']
 
     if (not ls_elements) or (ls_elements is None):
@@ -405,6 +423,16 @@ def split_list_into_junks(source_list: List[Any], junk_size: int = sys.maxsize) 
 
 
 def str_in_list_lower_and_de_double(list_of_strings: List[str]) -> List[str]:
+    """
+    to lower and deduplicate - does not keep order !
+
+    str_in_list_lower_and_de_double(['a', 'b', 'c', 'b', 'A'])  --> 'a', 'b', 'c'
+
+    >>> assert len (str_in_list_lower_and_de_double(['a', 'b', 'c', 'b', 'A'])) == 3
+    >>> str_in_list_lower_and_de_double([])
+    []
+
+    """
     if not list_of_strings:
         return list_of_strings
     list_of_strings_lower = str_in_list_to_lower(list_of_strings=list_of_strings)
@@ -431,6 +459,8 @@ def str_in_list_to_lower(list_of_strings: List[str]) -> List[str]:
     """
     >>> str_in_list_to_lower(['A','b','C'])
     ['a', 'b', 'c']
+    >>> str_in_list_to_lower([])
+    []
 
     """
     if not list_of_strings:
@@ -439,13 +469,24 @@ def str_in_list_to_lower(list_of_strings: List[str]) -> List[str]:
     return [string.lower() for string in list_of_strings]
 
 
-def strip_and_add_non_empty_args_to_list(*args: Any) -> List[Any]:
+def strip_and_add_non_empty_args_to_list(*args: Optional[str]) -> List[Any]:
     """
     erzeuge eine Liste von Argumenten, leere Argumente werden nicht in die Liste aufgenommen
-    Status:        Production
+
     Input :        eine beliebige Anzahl von Argumenten z.Bsp. "a","b","c","","d"
     Output:        ["a","b","c","d"]
     Exceptions:    Exception bei Fehler
+
+    >>> strip_and_add_non_empty_args_to_list('a  ', '  b', 'c', '', '  ')
+    ['a', 'b', 'c']
+
+    >>> strip_and_add_non_empty_args_to_list()
+    []
+
+    >>> strip_and_add_non_empty_args_to_list()
+    []
+
+
     """
 
     if (not args) or (args is None):
