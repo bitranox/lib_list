@@ -5,7 +5,7 @@ from typing import Any, List, Union
 
 
 def del_double_elements(l_elements: List[Any]) -> List[Any]:
-    """ get deduplicated list
+    """get deduplicated list
     >>> del_double_elements([])
     []
     >>> sorted(del_double_elements(['c','b','a']))
@@ -22,7 +22,7 @@ def del_double_elements(l_elements: List[Any]) -> List[Any]:
 
 
 def get_elements_fnmatching(l_elements: List[Any], s_fnmatch_searchpattern: str) -> List[str]:
-    """ get all elements with type str which are matching the searchpattern
+    """get all elements with type str which are matching the searchpattern
 
     >>> get_elements_fnmatching([], 'a*')
     []
@@ -44,7 +44,7 @@ def get_elements_fnmatching(l_elements: List[Any], s_fnmatch_searchpattern: str)
 
 
 def get_list_elements_containing(l_elements: List[Any], s_search_string: str) -> List[str]:
-    """ get list elements of type str which contain the searchstring
+    """get list elements of type str which contain the searchstring
 
     >>> get_list_elements_containing([], 'bc')
     []
@@ -66,7 +66,7 @@ def get_list_elements_containing(l_elements: List[Any], s_search_string: str) ->
 
 
 def is_list_element_fnmatching(l_elements: List[Any], s_fnmatch_searchpattern: str) -> bool:
-    """ True if at least one element is matching the searchpattern
+    """True if at least one element is matching the searchpattern
 
     >>> is_list_element_fnmatching([], 'bc')
     False
@@ -91,7 +91,7 @@ def is_list_element_fnmatching(l_elements: List[Any], s_fnmatch_searchpattern: s
 
 
 def is_list_element_l_fnmatching(l_elements: List[Any], ls_fnmatch_searchpattern: List[str]) -> bool:
-    """ True if at least one element is matching one of the the searchpatterns
+    """True if at least one element is matching one of the the searchpatterns
 
     >>> is_list_element_l_fnmatching([], [])
     False
@@ -145,7 +145,7 @@ def is_str_in_list_elements(ls_elements: List[str], s_search_string: str) -> boo
 
 
 def l_substract_all_keep_sorting(l_minuend: List[Any], l_subtrahend: List[Any]) -> List[Any]:
-    """ substract the list l_subtrahend from list l_minuend
+    """substract the list l_subtrahend from list l_minuend
     if the same element is more then once in l_minuend, so all of that elements are subtracted.
 
 
@@ -228,7 +228,7 @@ def ls_del_empty_elements(ls_elements: List[Any]) -> List[Any]:
 
 
 def ls_double_quote_if_contains_blank(ls_elements: List[str]) -> List[str]:
-    """ double quote all elements in a list of string which contain a blank
+    """double quote all elements in a list of string which contain a blank
 
     >>> ls_double_quote_if_contains_blank([])
     []
