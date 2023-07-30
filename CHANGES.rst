@@ -8,7 +8,7 @@ Changelog
 v1.1.9
 ---------
 2023-07-30:
-    -   flake 8 E721 do not compare types, for instance checks use `isinstance()`
+    - flake 8 E721 do not compare types, for instance checks use `isinstance()`
 
 v1.1.8
 ---------
