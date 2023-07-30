@@ -271,7 +271,7 @@ def ls_elements_replace_strings(ls_elements: List[str], s_old: str, s_new: str) 
 
     ls_results = []
     for s_element in ls_elements:
-        if type(s_element) == str:
+        if isinstance(s_element, str):
             s_element = s_element.replace(s_old, s_new)
         ls_results.append(s_element)
     return ls_results

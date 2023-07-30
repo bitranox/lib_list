@@ -5,6 +5,11 @@ Changelog
 - new MINOR version for added functionality in a backwards compatible manner
 - new PATCH version for backwards compatible bug fixes
 
+v1.1.9
+---------
+2023-07-30:
+    -   flake 8 E721 do not compare types, for instance checks use `isinstance()`
+
 v1.1.8
 ---------
 2023-07-14:

@@ -2,7 +2,7 @@ lib_list
 ========
 
 
-Version v1.1.8 as of 2023-07-14 see `Changelog`_
+Version v1.1.9 as of 2023-07-30 see `Changelog`_
 
 |build_badge| |codeql| |license| |jupyter| |pypi|
 |pypi-downloads| |black| |codecov| |cc_maintain| |cc_issues| |cc_coverage| |snyk|
@@ -224,6 +224,11 @@ Changelog
 - new MAJOR version for incompatible API changes,
 - new MINOR version for added functionality in a backwards compatible manner
 - new PATCH version for backwards compatible bug fixes
+
+v1.1.9
+---------
+2023-07-30:
+    -   flake 8 E721 do not compare types, for instance checks use `isinstance()`
 
 v1.1.8
 ---------

@@ -26,10 +26,10 @@ classifiers = [
 # dependencies - former setup.cfg "install_requires"
 # see: https://setuptools.pypa.io/en/latest/userguide/dependency_management.html
 dependencies = [
-    "click",
     "cli_exit_tools",
+    "click",
 ]
-version = "v1.1.8"
+version = "v1.1.9"
 # seems to be not allowed anymore
 # zip-save = false
 
@@ -46,7 +46,7 @@ test = [
     "coloredlogs",
     "coverage",
     "flake8",
-    "mypy ; platform_python_implementation != 'PyPy'",
+    "mypy",
     "pytest",
     "pytest-cov",
     "pytest-runner",
@@ -58,9 +58,9 @@ test = [
 
 [tool.setuptools.package-data]
 lib_list = [
-    "py.typed",
     "*.pyi",
     "__init__.pyi",
+    "py.typed",
 ]
 
 [tool.black]
