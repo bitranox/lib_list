@@ -4,24 +4,26 @@ import sys
 from typing import Any, List, Optional, Tuple, Union
 
 
-def del_double_elements(l_elements: List[Any]) -> List[Any]:
+# deduplicate{{{
+def deduplicate(elements: List[Any]) -> List[Any]:
     """get deduplicated list, does NOT keep Order !
-    >>> del_double_elements([])
+    >>> deduplicate([])
     []
-    >>> sorted(del_double_elements(['c','b','a']))
+    >>> sorted(deduplicate(['c','b','a']))
     ['a', 'b', 'c']
-    >>> sorted(del_double_elements(['b','a','c','b','a']))
+    >>> sorted(deduplicate(['b','a','c','b','a']))
     ['a', 'b', 'c']
-    >>> sorted(del_double_elements(['x','x','x','y','y']))
+    >>> sorted(deduplicate(['x','x','x','y','y']))
     ['x', 'y']
     """
+    # deduplicate}}}
 
-    if not l_elements:
-        return l_elements
-    return list(set(l_elements))
+    if not elements:
+        return elements
+    return list(set(elements))
 
 
-def get_elements_fnmatching(l_elements: List[Any], s_fnmatch_searchpattern: str) -> List[str]:
+def get_elements_fnmatching(elements: List[Any], fnmatch_searchpattern: str) -> List[str]:
     """get all elements with type str which are matching the searchpattern
 
     >>> get_elements_fnmatching([], 'a*')
@@ -30,13 +32,13 @@ def get_elements_fnmatching(l_elements: List[Any], s_fnmatch_searchpattern: str)
     ['abc']
 
     """
-    if not l_elements:
-        return l_elements
+    if not elements:
+        return elements
 
     ls_results: List[str] = []
-    for s_element in l_elements:
+    for s_element in elements:
         if isinstance(s_element, str):
-            if fnmatch.fnmatch(s_element, s_fnmatch_searchpattern):
+            if fnmatch.fnmatch(s_element, fnmatch_searchpattern):
                 ls_results.append(s_element)
     return ls_results
 
@@ -434,7 +436,7 @@ def str_in_list_lower_and_de_double(list_of_strings: List[str]) -> List[str]:
     if not list_of_strings:
         return list_of_strings
     list_of_strings_lower = str_in_list_to_lower(list_of_strings=list_of_strings)
-    list_of_strings_lower_and_de_double = del_double_elements(l_elements=list_of_strings_lower)
+    list_of_strings_lower_and_de_double = deduplicate(elements=list_of_strings_lower)
     return list_of_strings_lower_and_de_double
 
 

@@ -2,7 +2,7 @@ lib_list
 ========
 
 
-Version v1.1.9 as of 2023-07-30 see `Changelog`_
+Version v1.1.9 as of 2023-08-06 see `Changelog`_
 
 |build_badge| |codeql| |license| |jupyter| |pypi|
 |pypi-downloads| |black| |codecov| |cc_maintain| |cc_issues| |cc_coverage| |snyk|
@@ -94,6 +94,20 @@ Usage
 
     import the module and check the code - its easy and documented there, including doctest examples.
     in case of any questions the usage section might be expanded at a later time
+
+.. code-block:: python
+
+    def deduplicate(elements: List[Any]) -> List[Any]:
+        """get deduplicated list, does NOT keep Order !
+        >>> deduplicate([])
+        []
+        >>> sorted(deduplicate(['c','b','a']))
+        ['a', 'b', 'c']
+        >>> sorted(deduplicate(['b','a','c','b','a']))
+        ['a', 'b', 'c']
+        >>> sorted(deduplicate(['x','x','x','y','y']))
+        ['x', 'y']
+        """
 
 Usage from Commandline
 ------------------------
