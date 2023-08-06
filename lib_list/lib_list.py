@@ -23,23 +23,24 @@ def deduplicate(elements: List[Any]) -> List[Any]:
     return list(set(elements))
 
 
-def get_elements_fnmatching(elements: List[Any], fnmatch_searchpattern: str) -> List[str]:
-    """get all elements with type str which are matching the searchpattern
+# filter_fnmatching{{{
+def filter_fnmatching(elements: List[Any], search_pattern: str) -> List[str]:
+    """get all elements with type str which are matching the fnmatch searchpattern
 
-    >>> get_elements_fnmatching([], 'a*')
+    >>> filter_fnmatching([], 'a*')
     []
-    >>> get_elements_fnmatching(['abc', 'def', 1, None], 'a*')
+    >>> filter_fnmatching(['abc', 'def', 1, None], 'a*')
     ['abc']
-
     """
+    # filter_fnmatching}}}
     if not elements:
         return elements
 
     ls_results: List[str] = []
-    for s_element in elements:
-        if isinstance(s_element, str):
-            if fnmatch.fnmatch(s_element, fnmatch_searchpattern):
-                ls_results.append(s_element)
+    for element in elements:
+        if isinstance(element, str):
+            if fnmatch.fnmatch(element, search_pattern):
+                ls_results.append(element)
     return ls_results
 
 

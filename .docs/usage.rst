@@ -10,3 +10,7 @@
     :end-before: # deduplicate}}}
 
 
+.. include:: ../lib_list/lib_list.py
+    :code: python
+    :start-after: # filter_fnmatching{{{
+    :end-before: # filter_fnmatching}}}

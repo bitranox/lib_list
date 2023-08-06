@@ -2,7 +2,7 @@ lib_list
 ========
 
 
-Version v1.1.9 as of 2023-08-06 see `Changelog`_
+Version v1.1.9 as of 2023-08-07 see `Changelog`_
 
 |build_badge| |codeql| |license| |jupyter| |pypi|
 |pypi-downloads| |black| |codecov| |cc_maintain| |cc_issues| |cc_coverage| |snyk|
@@ -107,6 +107,17 @@ Usage
         ['a', 'b', 'c']
         >>> sorted(deduplicate(['x','x','x','y','y']))
         ['x', 'y']
+        """
+
+.. code-block:: python
+
+    def filter_fnmatching(elements: List[Any], search_pattern: str) -> List[str]:
+        """get all elements with type str which are matching the fnmatch searchpattern
+
+        >>> filter_fnmatching([], 'a*')
+        []
+        >>> filter_fnmatching(['abc', 'def', 1, None], 'a*')
+        ['abc']
         """
 
 Usage from Commandline
