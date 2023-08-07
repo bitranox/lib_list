@@ -111,13 +111,38 @@ Usage
 
 .. code-block:: python
 
-    def filter_fnmatching(elements: List[Any], search_pattern: str) -> List[str]:
-        """get all elements with type str which are matching the fnmatch searchpattern
+    def filter_contain(elements: List[Any], search_string: str) -> List[str]:
+        """Retrieve a list of string elements that contain the specified search string.
 
-        >>> filter_fnmatching([], 'a*')
+        >>> filter_contain([], 'bc')
         []
-        >>> filter_fnmatching(['abc', 'def', 1, None], 'a*')
+        >>> filter_contain(['abcd', 'def', 1, None], 'bc')
+        ['abcd']
+        """
+
+.. code-block:: python
+
+    def filter_fnmatch(elements: List[Any], search_pattern: str) -> List[str]:
+        """Retrieve a list of string elements which are matching the fnmatch search pattern
+
+        >>> filter_fnmatch([], 'a*')
+        []
+        >>> filter_fnmatch(['abc', 'def', 1, None], 'a*')
         ['abc']
+        """
+
+.. code-block:: python
+
+    def is_fnmatching(elements: List[Any], search_pattern: str) -> bool:
+        """True if at least one element is matching the searchpattern
+
+        >>> is_fnmatching([], 'bc')
+        False
+        >>> is_fnmatching(['abcd', 'def', 1, None], '*bc*')
+        True
+        >>> is_fnmatching(['abcd', 'def', 1, None], '*1*')
+        False
+
         """
 
 Usage from Commandline

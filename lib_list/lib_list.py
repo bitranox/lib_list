@@ -23,16 +23,39 @@ def deduplicate(elements: List[Any]) -> List[Any]:
     return list(set(elements))
 
 
-# filter_fnmatching{{{
-def filter_fnmatching(elements: List[Any], search_pattern: str) -> List[str]:
-    """get all elements with type str which are matching the fnmatch searchpattern
+# filter_contain{{{
+def filter_contain(elements: List[Any], search_string: str) -> List[str]:
+    """Retrieve a list of string elements that contain the specified search string.
 
-    >>> filter_fnmatching([], 'a*')
+    >>> filter_contain([], 'bc')
     []
-    >>> filter_fnmatching(['abc', 'def', 1, None], 'a*')
+    >>> filter_contain(['abcd', 'def', 1, None], 'bc')
+    ['abcd']
+    """
+    # filter_contain}}}
+    if (not elements) or (not search_string):
+        return elements
+
+    ls_results = []
+    for element in elements:
+        if isinstance(element, str):
+            if search_string in element:
+                ls_results.append(element)
+            else:
+                continue
+    return ls_results
+
+
+# filter_fnmatch{{{
+def filter_fnmatch(elements: List[Any], search_pattern: str) -> List[str]:
+    """Retrieve a list of string elements which are matching the fnmatch search pattern
+
+    >>> filter_fnmatch([], 'a*')
+    []
+    >>> filter_fnmatch(['abc', 'def', 1, None], 'a*')
     ['abc']
     """
-    # filter_fnmatching}}}
+    # filter_fnmatch}}}
     if not elements:
         return elements
 
@@ -44,51 +67,30 @@ def filter_fnmatching(elements: List[Any], search_pattern: str) -> List[str]:
     return ls_results
 
 
-def get_list_elements_containing(l_elements: List[Any], s_search_string: str) -> List[str]:
-    """get list elements of type str which contain the searchstring
-
-    >>> get_list_elements_containing([], 'bc')
-    []
-    >>> get_list_elements_containing(['abcd', 'def', 1, None], 'bc')
-    ['abcd']
-
-    """
-    if (not l_elements) or (not s_search_string):
-        return l_elements
-
-    ls_results = []
-    for s_element in l_elements:
-        if isinstance(s_element, str):
-            if s_search_string in s_element:
-                ls_results.append(s_element)
-            else:
-                continue
-    return ls_results
-
-
-def is_list_element_fnmatching(l_elements: List[Any], s_fnmatch_searchpattern: str) -> bool:
+# is_fnmatching{{{
+def is_fnmatching(elements: List[Any], search_pattern: str) -> bool:
     """True if at least one element is matching the searchpattern
 
-    >>> is_list_element_fnmatching([], 'bc')
+    >>> is_fnmatching([], 'bc')
     False
-    >>> is_list_element_fnmatching(['abcd', 'def', 1, None], '*bc*')
+    >>> is_fnmatching(['abcd', 'def', 1, None], '*bc*')
     True
-    >>> is_list_element_fnmatching(['abcd', 'def', 1, None], '*1*')
+    >>> is_fnmatching(['abcd', 'def', 1, None], '*1*')
     False
 
     """
-
-    if (not l_elements) or (l_elements is None):
+    # is_fnmatching}}}
+    if (not elements) or (elements is None):
         return False
 
-    b_ls_fnmatching_searchstring = False
-    for s_element in l_elements:
-        if isinstance(s_element, str):
-            if fnmatch.fnmatch(s_element, s_fnmatch_searchpattern):
-                b_ls_fnmatching_searchstring = True
+    b_is_fnmatching = False
+    for element in elements:
+        if isinstance(element, str):
+            if fnmatch.fnmatch(element, search_pattern):
+                b_is_fnmatching = True
                 break
 
-    return b_ls_fnmatching_searchstring
+    return b_is_fnmatching
 
 
 def is_list_element_l_fnmatching(l_elements: List[Any], ls_fnmatch_searchpattern: List[str]) -> bool:
@@ -115,7 +117,7 @@ def is_list_element_l_fnmatching(l_elements: List[Any], ls_fnmatch_searchpattern
         return False
 
     for s_fnmatch_searchpattern in ls_fnmatch_searchpattern:
-        if is_list_element_fnmatching(l_elements, s_fnmatch_searchpattern):
+        if is_fnmatching(l_elements, s_fnmatch_searchpattern):
             return True
 
     return False

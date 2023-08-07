@@ -12,5 +12,17 @@
 
 .. include:: ../lib_list/lib_list.py
     :code: python
-    :start-after: # filter_fnmatching{{{
-    :end-before: # filter_fnmatching}}}
+    :start-after: # filter_contain{{{
+    :end-before: # filter_contain}}}
+
+
+.. include:: ../lib_list/lib_list.py
+    :code: python
+    :start-after: # filter_fnmatch{{{
+    :end-before: # filter_fnmatch}}}
+
+
+.. include:: ../lib_list/lib_list.py
+    :code: python
+    :start-after: # is_fnmatching{{{
+    :end-before: # is_fnmatching}}}
