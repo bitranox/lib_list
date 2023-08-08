@@ -197,8 +197,8 @@ def substract_all_keep_sorting(minuend: List[Any], subtrahend: List[Any]) -> Lis
     if not subtrahend:
         return minuend
 
-    subtrahend = set(subtrahend)
-    for element in subtrahend:
+    subtrahend_dedup = set(subtrahend)
+    for element in subtrahend_dedup:
         while element in minuend:
             minuend.remove(element)
     return minuend
