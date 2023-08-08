@@ -2,7 +2,7 @@ lib_list
 ========
 
 
-Version v1.1.9 as of 2023-08-07 see `Changelog`_
+Version v1.1.9 as of 2023-08-08 see `Changelog`_
 
 
 .. include:: ./badges.rst

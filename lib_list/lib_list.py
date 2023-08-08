@@ -23,16 +23,40 @@ def deduplicate(elements: List[Any]) -> List[Any]:
     return list(set(elements))
 
 
-# filter_contain{{{
-def filter_contain(elements: List[Any], search_string: str) -> List[str]:
+# del_elements_containing{{{
+def del_elements_containing(elements: List[str], search_string: str) -> List[str]:
+    """ delete the elements which contain (or are equal) the search_string
+
+    >>> del_elements_containing(['a', 'abba', 'c'], 'b')
+    ['a', 'c']
+    >>> del_elements_containing(['a', 'abba', 'c'], 'z')
+    ['a', 'abba', 'c']
+    >>> del_elements_containing(['a', 'abba', 'c'], '')
+    ['a', 'abba', 'c']
+    >>> del_elements_containing([], 'b')
+    []
+    """
+    # del_elements_containing}}}
+    if (not elements) or (not search_string):
+        return elements
+
+    ls_results = []
+    for element in elements:
+        if search_string not in element:
+            ls_results.append(element)
+    return ls_results
+
+
+# filter_contains{{{
+def filter_contains(elements: List[Any], search_string: str) -> List[str]:
     """Retrieve a list of string elements that contain the specified search string.
 
-    >>> filter_contain([], 'bc')
+    >>> filter_contains([], 'bc')
     []
-    >>> filter_contain(['abcd', 'def', 1, None], 'bc')
+    >>> filter_contains(['abcd', 'def', 1, None], 'bc')
     ['abcd']
     """
-    # filter_contain}}}
+    # filter_contains}}}
     if (not elements) or (not search_string):
         return elements
 
@@ -67,6 +91,33 @@ def filter_fnmatch(elements: List[Any], search_pattern: str) -> List[str]:
     return ls_results
 
 
+# is_element_containing{{{
+def is_element_containing(elements: List[str], search_string: str) -> bool:
+    """delivers true, if one of the strings in the list contains (or is equal) the searchstring
+
+    >>> is_element_containing([], '')
+    False
+
+    >>> is_element_containing(['abcd', 'def', 1, None], '')
+    True
+
+    >>> is_element_containing(['abcd', 'def', 1, None], 'bc')
+    True
+
+    >>> is_element_containing(['abcd', 'def', 1, None], 'fg')
+    False
+    """
+    # is_element_containing}}}
+    if not elements:
+        return False
+
+    for element in elements:
+        if isinstance(element, str):
+            if search_string in element:
+                return True
+    return False
+
+
 # is_fnmatching{{{
 def is_fnmatching(elements: List[Any], search_pattern: str) -> bool:
     """True if at least one element is matching the searchpattern
@@ -93,131 +144,80 @@ def is_fnmatching(elements: List[Any], search_pattern: str) -> bool:
     return b_is_fnmatching
 
 
-def is_list_element_l_fnmatching(l_elements: List[Any], ls_fnmatch_searchpattern: List[str]) -> bool:
-    """True if at least one element is matching one of the the searchpatterns
+# is_fnmatching_one_pattern{{{
+def is_fnmatching_one_pattern(elements: List[Any], search_patterns: List[str]) -> bool:
+    """True if at least one element is matching at least one of the searchpatterns
 
-    >>> is_list_element_l_fnmatching([], [])
+    >>> is_fnmatching_one_pattern([], [])
     False
 
-    >>> is_list_element_l_fnmatching(['abcd', 'def', 1, None], [])
+    >>> is_fnmatching_one_pattern(['abcd', 'def', 1, None], [])
     False
 
-    >>> is_list_element_l_fnmatching(['abcd', 'def', 1, None], ['*bc*', '*fg*'])
+    >>> is_fnmatching_one_pattern(['abcd', 'def', 1, None], ['*bc*', '*fg*'])
     True
 
-    >>> is_list_element_l_fnmatching(['abcd', 'def', 1, None], ['*fg*', '*gh*'])
+    >>> is_fnmatching_one_pattern(['abcd', 'def', 1, None], ['*fg*', '*gh*'])
     False
-
     """
-
-    if not l_elements:
+    # is_fnmatching_one_pattern}}}
+    if not elements:
         return False
 
-    if not ls_fnmatch_searchpattern:
+    if not search_patterns:
         return False
 
-    for s_fnmatch_searchpattern in ls_fnmatch_searchpattern:
-        if is_fnmatching(l_elements, s_fnmatch_searchpattern):
+    for search_pattern in search_patterns:
+        if is_fnmatching(elements, search_pattern):
             return True
 
     return False
 
 
-def is_str_in_list_elements(ls_elements: List[str], s_search_string: str) -> bool:
-    """delivers true, if one of the strings in the list contains (or is equal) the searchstring
-
-    >>> is_str_in_list_elements([], '')
-    False
-
-    >>> is_str_in_list_elements(['abcd', 'def', 1, None], '')
-    True
-
-    >>> is_str_in_list_elements(['abcd', 'def', 1, None], 'bc')
-    True
-
-    >>> is_str_in_list_elements(['abcd', 'def', 1, None], 'fg')
-    False
-
-    """
-
-    if not ls_elements:
-        return False
-
-    for s_element in ls_elements:
-        if isinstance(s_element, str):
-            if s_search_string in s_element:
-                return True
-    return False
-
-
-def l_substract_all_keep_sorting(l_minuend: List[Any], l_subtrahend: List[Any]) -> List[Any]:
+# substract_all_keep_sorting{{{
+def substract_all_keep_sorting(minuend: List[Any], subtrahend: List[Any]) -> List[Any]:
     """substract the list l_subtrahend from list l_minuend
-    if the same element is more then once in l_minuend, so all of that elements are subtracted.
+    if the same element is more than once in l_minuend, so all of that elements are subtracted.
+    the sorting order of the minuend is preserved
 
-
-    >>> l_substract_all_keep_sorting([], ['a'])
+    >>> substract_all_keep_sorting([], ['a'])
     []
-    >>> l_substract_all_keep_sorting(['a', 'a'], [])
+    >>> substract_all_keep_sorting(['a', 'a'], [])
     ['a', 'a']
 
     >>> my_l_minuend = ['a','a','b']
     >>> my_l_subtrahend = ['a','c']
-    >>> l_substract_all_keep_sorting(my_l_minuend, my_l_subtrahend)
+    >>> substract_all_keep_sorting(my_l_minuend, my_l_subtrahend)
     ['b']
-
     """
+    # substract_all_keep_sorting}}}
+    if not minuend:
+        return minuend
 
-    if not l_minuend:
-        return l_minuend
+    if not subtrahend:
+        return minuend
 
-    if not l_subtrahend:
-        return l_minuend
-
-    l_subtrahend = list(set(l_subtrahend))
-    for s_element in l_subtrahend:
-        while s_element in l_minuend:
-            l_minuend.remove(s_element)
-    return l_minuend
+    subtrahend = set(subtrahend)
+    for element in subtrahend:
+        while element in minuend:
+            minuend.remove(element)
+    return minuend
 
 
-def l_substract_unsorted_fast(ls_minuend: List[Any], ls_subtrahend: List[Any]) -> List[Any]:
-    """
-    subtrahiere Liste ls_subtrahend von Liste ls_minuend
-    wenn ein Element in Liste ls_minuend mehrfach vorkommt, so werden alle Elemente abgezogen
-    die Sortierung wird NICHT beibehalten !
-    >>> my_ls_minuend = ['a','a','b']
-    >>> my_ls_subtrahend = ['a','c']
-    >>> l_substract_unsorted_fast(my_ls_minuend, my_ls_subtrahend)
+# substract_all_unsorted_fast{{{
+def substract_all_unsorted_fast(minuend: List[Any], subtrahend: List[Any]) -> List[Any]:
+    """substract the list l_subtrahend from list l_minuend
+    if the same element is more than once in l_minuend, so all of that elements are subtracted.
+    the sorting order of the minuend is NOT preserved
+
+    >>> my_minuend = ['a','a','b']
+    >>> my_subtrahend = ['a','c']
+    >>> substract_all_unsorted_fast(my_minuend, my_subtrahend)
     ['b']
-
     """
-    l_result = list(set(ls_minuend) - set(ls_subtrahend))
-    return l_result
-
-
-def ls_del_elements_containing(ls_elements: List[str], s_search_string: str) -> List[str]:
-    """
-    entferne jene Elemente deren Typ str ist und die s_search_string enthalten.
-    gib alle anderen Elemente unverändert retour.
-
-    >>> ls_del_elements_containing(['a', 'abba', 'c'], 'b')
-    ['a', 'c']
-    >>> ls_del_elements_containing(['a', 'abba', 'c'], 'z')
-    ['a', 'abba', 'c']
-    >>> ls_del_elements_containing(['a', 'abba', 'c'], '')
-    ['a', 'abba', 'c']
-    >>> ls_del_elements_containing([], 'b')
-    []
-
-    """
-    if (not ls_elements) or (not s_search_string):
-        return ls_elements
-
-    ls_results = []
-    for s_element in ls_elements:
-        if s_search_string not in s_element:
-            ls_results.append(s_element)
-    return ls_results
+    # substract_all_unsorted_fast}}}
+    result = list(set(minuend) - set(subtrahend))
+    return result
 
 
 def ls_del_empty_elements(ls_elements: List[Any]) -> List[Any]:

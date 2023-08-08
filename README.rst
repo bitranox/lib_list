@@ -2,7 +2,7 @@ lib_list
 ========
 
 
-Version v1.1.9 as of 2023-08-07 see `Changelog`_
+Version v1.1.9 as of 2023-08-08 see `Changelog`_
 
 |build_badge| |codeql| |license| |jupyter| |pypi|
 |pypi-downloads| |black| |codecov| |cc_maintain| |cc_issues| |cc_coverage| |snyk|
@@ -111,12 +111,27 @@ Usage
 
 .. code-block:: python
 
-    def filter_contain(elements: List[Any], search_string: str) -> List[str]:
+    def del_elements_containing(elements: List[str], search_string: str) -> List[str]:
+        """ delete the elements which contain (or are equal) the search_string
+
+        >>> del_elements_containing(['a', 'abba', 'c'], 'b')
+        ['a', 'c']
+        >>> del_elements_containing(['a', 'abba', 'c'], 'z')
+        ['a', 'abba', 'c']
+        >>> del_elements_containing(['a', 'abba', 'c'], '')
+        ['a', 'abba', 'c']
+        >>> del_elements_containing([], 'b')
+        []
+        """
+
+.. code-block:: python
+
+    def filter_contains(elements: List[Any], search_string: str) -> List[str]:
         """Retrieve a list of string elements that contain the specified search string.
 
-        >>> filter_contain([], 'bc')
+        >>> filter_contains([], 'bc')
         []
-        >>> filter_contain(['abcd', 'def', 1, None], 'bc')
+        >>> filter_contains(['abcd', 'def', 1, None], 'bc')
         ['abcd']
         """
 
@@ -133,6 +148,24 @@ Usage
 
 .. code-block:: python
 
+    def is_element_containing(elements: List[str], search_string: str) -> bool:
+        """delivers true, if one of the strings in the list contains (or is equal) the searchstring
+
+        >>> is_element_containing([], '')
+        False
+
+        >>> is_element_containing(['abcd', 'def', 1, None], '')
+        True
+
+        >>> is_element_containing(['abcd', 'def', 1, None], 'bc')
+        True
+
+        >>> is_element_containing(['abcd', 'def', 1, None], 'fg')
+        False
+        """
+
+.. code-block:: python
+
     def is_fnmatching(elements: List[Any], search_pattern: str) -> bool:
         """True if at least one element is matching the searchpattern
 
@@ -143,6 +176,55 @@ Usage
         >>> is_fnmatching(['abcd', 'def', 1, None], '*1*')
         False
 
+        """
+
+.. code-block:: python
+
+    def is_fnmatching_one_pattern(elements: List[Any], search_patterns: List[str]) -> bool:
+        """True if at least one element is matching at least one of the searchpatterns
+
+        >>> is_fnmatching_one_pattern([], [])
+        False
+
+        >>> is_fnmatching_one_pattern(['abcd', 'def', 1, None], [])
+        False
+
+        >>> is_fnmatching_one_pattern(['abcd', 'def', 1, None], ['*bc*', '*fg*'])
+        True
+
+        >>> is_fnmatching_one_pattern(['abcd', 'def', 1, None], ['*fg*', '*gh*'])
+        False
+        """
+
+.. code-block:: python
+
+    def substract_all_keep_sorting(minuend: List[Any], subtrahend: List[Any]) -> List[Any]:
+        """substract the list l_subtrahend from list l_minuend
+        if the same element is more than once in l_minuend, so all of that elements are subtracted.
+        the sorting order of the minuend is preserved
+
+        >>> substract_all_keep_sorting([], ['a'])
+        []
+        >>> substract_all_keep_sorting(['a', 'a'], [])
+        ['a', 'a']
+
+        >>> my_l_minuend = ['a','a','b']
+        >>> my_l_subtrahend = ['a','c']
+        >>> substract_all_keep_sorting(my_l_minuend, my_l_subtrahend)
+        ['b']
+        """
+
+.. code-block:: python
+
+    def substract_all_unsorted_fast(minuend: List[Any], subtrahend: List[Any]) -> List[Any]:
+        """substract the list l_subtrahend from list l_minuend
+        if the same element is more than once in l_minuend, so all of that elements are subtracted.
+        the sorting order of the minuend is NOT preserved
+
+        >>> my_minuend = ['a','a','b']
+        >>> my_subtrahend = ['a','c']
+        >>> substract_all_unsorted_fast(my_minuend, my_subtrahend)
+        ['b']
         """
 
 Usage from Commandline
